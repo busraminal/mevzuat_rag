@@ -117,7 +117,7 @@ python query.py --q "Kentsel dönüşüm raporlarında zorunlu alanlar nelerdir?
 ```
 
 
-📊 Benchmark & Performans:
+### 📊 Benchmark & Performans:
 
 Ortalama retrieval latency: 120ms (FAISS + BM25 hybrid)
 
@@ -127,7 +127,7 @@ Türkçe mevzuat corpus’unda Top-3 accuracy: %84
 
 Fallback MiniLM ile hız artışı: %+40 (doğrulukta %–8 düşüş)
 
-🌍 Kullanım Senaryoları:
+### 🌍 Kullanım Senaryoları:
 
 Gayrimenkul değerleme raporları → SPK düzenlemeleri ile uyum kontrolü
 
@@ -137,13 +137,13 @@ Akademik araştırmalar → mevzuat–doküman eşleşmeleri
 
 Avukatlık & danışmanlık → mevzuat atıflarının otomatik çıkarımı
 
-🤝 Katkı:
+### 🤝 Katkı:
 
 Issues → bug/feature request
 
 Pull Requests → yeni embedding modelleri, chunklama stratejileri, mevzuat corpus güncellemeleri
 
-📜 Lisans:
+### 📜 Lisans
 
 Bu proje MIT License kapsamında dağıtılmaktadır.
 
