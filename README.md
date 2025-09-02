@@ -83,14 +83,14 @@ pip install -r requirements.txt
 
 requirements.txt içeriği:
 
-faiss-cpu
-rank-bm25
-transformers
-sentence-transformers
-torch
-pandas
-numpy
-nltk
+faiss-cpu,
+rank-bm25,
+transformers,
+sentence-transformers,
+torch,
+pandas,
+numpy,
+nltk,
 PyPDF2
 
 
