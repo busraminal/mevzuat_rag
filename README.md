@@ -10,14 +10,17 @@ Mevzuat RAG, mevzuat ve düzenlemelerle ilgili dokümanları işleyip arama–ge
 
 ## 📐 Mimarinin Genel Akışı  
 
-flowchart TD
-    A[PDF / Text Input] --> B[Preprocessing & Cleaning]
-    B --> C[Chunking & Metadata Extraction]
-    C --> D[Hybrid Indexing: BM25 + FAISS]
-    D --> E[Retriever Pipeline]
-    E --> F[Reranker (Cross-Encoder)]
-    F --> G[LLM Inference]
-    G --> H[Answer with Citations / Gap Detection]
+| Adım | İşlem / Modül | Açıklama |
+|------|---------------|----------|
+| **A** | **PDF / Text Input** | Kullanıcıdan gelen ham veri (PDF veya düz metin) sisteme alınır. |
+| **B** | **Preprocessing & Cleaning** | Metin temizlenir: gereksiz karakterler, boşluklar, semboller ayıklanır; normalize edilir. |
+| **C** | **Chunking & Metadata Extraction** | Metin küçük parçalara (chunk) bölünür; her parçaya ada, parsel, tarih vb. metadata eklenir. |
+| **D** | **Hybrid Indexing: BM25 + FAISS** | Hem kelime tabanlı arama (BM25) hem de vektör tabanlı arama (FAISS) ile çift indeksleme yapılır. |
+| **E** | **Retriever Pipeline** | Sorguya en uygun chunk’lar indekslerden alınır. |
+| **F** | **Reranker (Cross-Encoder)** | Alınan chunk’lar bir cross-encoder ile tekrar sıralanarak en alakalı olanlar öne çıkarılır. |
+| **G** | **LLM Inference** | LLM, seçilen chunk’lar üzerinden akıllı çıkarım (cevap üretimi) yapar. |
+| **H** | **Answer with Citations / Gap Detection** | Nihai cevap oluşturulur; kaynak atıfları eklenir; eksik veya çelişen bilgi varsa boşluklar/gap’ler işaretlenir. |
+
 
 ## 🧩 Teknik Bileşenler  
 
@@ -97,8 +100,9 @@ python build_index.py --data_dir data_pdfs --output_dir index/
 2. Sorgu çalıştırma
 python query.py --q "Kentsel dönüşüm raporlarında zorunlu alanlar nelerdir?"
 
-3. Örnek çıktı
+### 3. Örnek çıktı  
 
+```json
 {
   "query": "Kentsel dönüşüm raporlarında zorunlu alanlar nelerdir?",
   "retrieved_chunks": [
@@ -108,8 +112,9 @@ python query.py --q "Kentsel dönüşüm raporlarında zorunlu alanlar nelerdir?
       "text": "SPK düzenlemesine göre raporlarda Ada/Parsel, Fiili Kullanım Amacı, Uzman TCKN zorunludur."
     }
   ],
-  "answer": "Raporlarda 'Ada/Parsel', 'Fiili Kullanım Amacı', 'Uzman Bilgileri (TCKN)' alanları mevzuat gereği zorunludur. Eksiklik halinde rapor geçersiz sayılır."
+  "answer": "Raporlarda 'Ada/Parsel', 'Fiili Kullanım Amacı' ve 'Uzman Bilgileri (TCKN)' alanları mevzuat gereği zorunludur. Eksiklik halinde rapor geçersiz sayılır."
 }
+
 
 
 📊 Benchmark & Performans
