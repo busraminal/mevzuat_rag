@@ -10,7 +10,6 @@ Mevzuat RAG, mevzuat ve düzenlemelerle ilgili dokümanları işleyip arama–ge
 
 ## 📐 Mimarinin Genel Akışı  
 
-```mermaid
 flowchart TD
     A[PDF / Text Input] --> B[Preprocessing & Cleaning]
     B --> C[Chunking & Metadata Extraction]
@@ -99,6 +98,7 @@ python build_index.py --data_dir data_pdfs --output_dir index/
 python query.py --q "Kentsel dönüşüm raporlarında zorunlu alanlar nelerdir?"
 
 3. Örnek çıktı
+
 {
   "query": "Kentsel dönüşüm raporlarında zorunlu alanlar nelerdir?",
   "retrieved_chunks": [
@@ -111,33 +111,22 @@ python query.py --q "Kentsel dönüşüm raporlarında zorunlu alanlar nelerdir?
   "answer": "Raporlarda 'Ada/Parsel', 'Fiili Kullanım Amacı', 'Uzman Bilgileri (TCKN)' alanları mevzuat gereği zorunludur. Eksiklik halinde rapor geçersiz sayılır."
 }
 
+
 📊 Benchmark & Performans
-
 Ortalama retrieval latency: 120ms (FAISS + BM25 hybrid)
-
 Ortalama LLM response latency: ~2.3s (7B model, A100 GPU)
-
 Türkçe mevzuat corpus’unda Top-3 accuracy: %84
-
 Fallback MiniLM ile hız artışı: %+40 (doğrulukta %–8 düşüş)
 
 🌍 Kullanım Senaryoları
-
 Gayrimenkul değerleme raporları → SPK düzenlemeleri ile uyum kontrolü
-
 Şirket içi uyumluluk denetimleri → zorunlu alan boşluklarının tespiti
-
 Akademik araştırmalar → mevzuat–doküman eşleşmeleri
-
 Avukatlık & danışmanlık → mevzuat atıflarının otomatik çıkarımı
 
 🤝 Katkı
-
 Issues → bug/feature request
-
 Pull Requests → yeni embedding modelleri, chunklama stratejileri, mevzuat corpus güncellemeleri
 
 📜 Lisans
-
-Bu proje MIT License
- kapsamında dağıtılmaktadır.
+Bu proje MIT License kapsamında dağıtılmaktadır.
